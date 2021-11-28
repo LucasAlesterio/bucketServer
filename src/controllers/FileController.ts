@@ -13,7 +13,6 @@ class FileController {
                 if (!fs.existsSync(newPath)) {
                     fs.mkdirSync(newPath);
                 }
-                console.log(newPath);
                 return newPath;
             },
             ["./public"]
@@ -28,7 +27,7 @@ class FileController {
                 resolve(200);
             });
         });
-        return response.status(200).json({
+        return response.status(201).json({
             message: "Image uploaded",
         });
     }
