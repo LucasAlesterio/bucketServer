@@ -1,9 +1,14 @@
 import { Request, Response } from "express";
 import fs from "fs";
 import { AppError } from "../errors/AppError";
+import "dotenv/config";
 class FileController {
     async upload(request: Request, response: Response) {
         const { names, images, path } = request.body;
+        const { authorization } = request.headers;
+        if (authorization !== process.env.KEY) {
+            throw new AppError("Invalid key", 401);
+        }
         if (
             !names ||
             !images ||
@@ -55,6 +60,10 @@ class FileController {
     }
     async delete(request: Request, response: Response) {
         const { names, path } = request.body;
+        const { authorization } = request.headers;
+        if (authorization !== process.env.KEY) {
+            throw new AppError("Invalid key", 401);
+        }
         if (!names || !path) {
             throw new AppError("Invalid data");
         }

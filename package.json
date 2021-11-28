@@ -8,9 +8,9 @@
     "test": "set NODE_ENV=test&&yarn jest -i"
   },
   "dependencies": {
+    "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "express-async-errors": "^3.1.1",
-    "handlebars": "^4.7.7",
     "reflect-metadata": "^0.1.13",
     "uuid": "^8.3.2",
     "yup": "^0.32.9"
