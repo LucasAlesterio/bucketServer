@@ -13,14 +13,18 @@ describe("Files", () => {
                 names: namesTest,
                 path: pathTest,
                 images: [base64ImateTest, base64ImateTest],
-            });
+            })
+            .set("authorization", process.env.KEY);
         expect(response.status).toBe(201);
     });
     it("Should not be able to save the image", async () => {
-        const response = await request(app).post("/upload").send({
-            path: pathTest,
-            images: base64ImateTest,
-        });
+        const response = await request(app)
+            .post("/upload")
+            .send({
+                path: pathTest,
+                images: base64ImateTest,
+            })
+            .set("authorization", process.env.KEY);
         expect(response.status).toBe(400);
     });
     it("Shold be able to get images", async () => {
@@ -35,10 +39,13 @@ describe("Files", () => {
         });
     });
     it("Shold be able to delete images", async () => {
-        const response = await request(app).post("/delete").send({
-            names: namesTest,
-            path: pathTest,
-        });
+        const response = await request(app)
+            .post("/delete")
+            .send({
+                names: namesTest,
+                path: pathTest,
+            })
+            .set("authorization", process.env.KEY);
         expect(response.status).toBe(200);
     });
 });
